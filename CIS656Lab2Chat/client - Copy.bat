@@ -1,0 +1,1 @@
+java -cp C:\Users\Nick\eclipse-workspace\CIS656Lab2Chat\src;C:\Users\Nick\eclipse-workspace\CIS656Lab2Chat\src\PresenceService.jar -Djava.rmi.server.codebase=file:/C:/Users/Nick/eclipse-workspace/CIS656Lab2Chat/src/ -Djava.security.policy=policy edu.gvsu.cis.cis656.lab2.client.ChatClient Nathan localhost:1099
