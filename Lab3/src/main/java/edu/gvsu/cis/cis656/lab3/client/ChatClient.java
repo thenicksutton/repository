@@ -145,15 +145,13 @@ public class ChatClient {
 			e.printStackTrace();
 		}
 
-		System.out.println("Using port " + port);
 		messageSvc  = new Thread(new InboundReqService(chatContext, port));
         messageSvc.start();
 	}
 	
 	private void sendBroadcastMessage(String message) {
 		try {
-			service.broadcast("Broadcast from " + this.username + ":  " + message);
-//			service.broadcast(username + "|Broadcast from " + this.username + ":  " + message);
+			service.broadcast(username + "|" + message);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -199,9 +197,9 @@ public class ChatClient {
 			broadcastContext.term();
 			broadcastSvc.join();
 			messageSvc.interrupt();
+			chatContext.close();
 			chatContext.term();
 			messageSvc.join();
-			System.out.println("Join success");
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -251,8 +249,6 @@ public class ChatClient {
 			String name = "PresenceService";
 			Registry registry = LocateRegistry.getRegistry(rmiHost, rmiPort);
 			service = (PresenceService) registry.lookup(name);
-
-			System.out.println("Connected to RMI service");
 
 			client = new ChatClient(service, username);
 

@@ -29,13 +29,13 @@ public class BroadcastSubscriptionService implements Runnable{
         while (!Thread.currentThread().isInterrupted()) {
             try{
                 String broadcast = subscriber.recvStr(0);
-                System.out.println(broadcast);
-                System.out.println(">>  ");
-//                String[] splitString = broadcast.split("|");
-//                if(!(splitString[0] == user)) {
-//                    System.out.println(splitString[1]);
-//                    System.out.print(">>  ");
-//                }
+//                System.out.println(broadcast);
+//                System.out.println(">>  ");
+                String[] splitString = broadcast.split("\\|");
+                if(!(splitString[0].equals(user))) {
+                    System.out.println("Broadcast from " + splitString[0] + ":  " + splitString[1]);
+                    System.out.print(">>  ");
+                }
             }
             catch(Exception e){
                 return;
@@ -43,16 +43,6 @@ public class BroadcastSubscriptionService implements Runnable{
 
 
         }
-
-//        ZMQ.Poller poller = new ZMQ.Poller(1);
-//        poller.register(subscriber, ZMQ.Poller.POLLIN);
-//        while (!Thread.currentThread().isInterrupted()) {
-//            poller.poll(100);
-//            if (poller.pollin(0)) {
-//                String content = subscriber.recvStr();
-//                System.out.println(content);
-//            }
-//        }
 
         System.out.println("Exited thread bcast");
     }
