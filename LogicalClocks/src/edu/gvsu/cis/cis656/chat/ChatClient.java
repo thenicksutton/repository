@@ -94,15 +94,16 @@ public class ChatClient {
      */
     public void inputShell(){
 
-        try {
+        while(true) {
+            try {
 
-            // Read a line
-            String chat = scanner.nextLine();
-            sendChat(chat);
-        } catch (Exception e) {
-            e.printStackTrace();
+                // Read a line
+                String chat = scanner.nextLine();
+                sendChat(chat);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     /**
